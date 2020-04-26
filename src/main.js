@@ -6,6 +6,7 @@ import { Button } from "ant-design-vue";
 
 Vue.config.productionTip = false;
 Vue.use(Button);
+
 new Vue({
   router,
   store,

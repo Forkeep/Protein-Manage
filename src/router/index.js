@@ -1,13 +1,18 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import NotFound from "../views/404";
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/user",
-    component: { render: h => h("router-view") },
+    component: () =>
+      import(/* webpackChunkName: "layout" */ "../layouts/UserLayout"),
     children: [
+      {
+        path: "/user",
+        redirect: "/user/login"
+      },
       {
         path: "/user/login",
         name: "login",
@@ -23,11 +28,6 @@ const routes = [
     ]
   },
   {
-    path: "/",
-    name: "Home",
-    component: Home
-  },
-  {
     path: "/about",
     name: "About",
     // route level code-splitting
@@ -35,6 +35,11 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue")
+  },
+  {
+    path: "*",
+    name: "NotFound",
+    component: NotFound
   }
 ];
 
