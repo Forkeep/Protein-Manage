@@ -1,9 +1,21 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import NotFound from "../views/404";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "/",
+    redirect: "/user/login"
+  },
+  {
+    path: "/test",
+    component: () =>
+      import(/* webpackChunkName: "layout" */ "../layouts/BaseLayout")
+  },
   {
     path: "/user",
     component: () =>
@@ -28,13 +40,22 @@ const routes = [
     ]
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: "/interact",
+    name: "interact",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import(/* webpackChunkName: "interact" */ "../views/Interact/index")
+  },
+  {
+    path: "/protein-manage",
+    name: "protein-manage",
+    component: () =>
+      import(/* webpackChunkName: "protein" */ "../views/ProteinManage/index")
+  },
+  {
+    path: "/user-manage",
+    name: "user-manage",
+    component: () =>
+      import(/* webpackChunkName: "user" */ "../views/UserManage/index")
   },
   {
     path: "*",
@@ -47,6 +68,14 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  NProgress.start();
+  next();
+});
+router.afterEach(() => {
+  NProgress.done();
 });
 
 export default router;
