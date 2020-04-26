@@ -58,6 +58,12 @@ const routes = [
       import(/* webpackChunkName: "user" */ "../views/UserManage/index")
   },
   {
+    path: "/system-introduce",
+    name: "SystemIntroduce",
+    component: () =>
+      import(/* webpackChunkName: "layout" */ "../views/SystemInro")
+  },
+  {
     path: "*",
     name: "NotFound",
     component: NotFound

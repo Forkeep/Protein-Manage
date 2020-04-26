@@ -15,36 +15,59 @@
       >
         蛋白质
       </div>
-      <a-menu theme="dark" :defaultSelectedKeys="['1']" mode="inline">
-        <a-menu-item key="1">
-          <a-icon type="pie-chart" />
-          <span>Option 1</span>
-        </a-menu-item>
-        <a-menu-item key="2">
-          <a-icon type="desktop" />
-          <span>Option 2</span>
-        </a-menu-item>
+      <a-menu theme="dark" :defaultSelectedKeys="['8']" mode="inline">
         <a-sub-menu key="sub1">
-          <span slot="title"><a-icon type="user" /><span>User</span></span>
-          <a-menu-item key="3">Tom</a-menu-item>
-          <a-menu-item key="4">Bill</a-menu-item>
-          <a-menu-item key="5">Alex</a-menu-item>
+          <span slot="title"
+            ><a-icon type="bulb" /><span>蛋白质管理</span></span
+          >
+          <a-menu-item key="1">蛋白质链</a-menu-item>
+          <a-menu-item key="2">蛋白质属性</a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="sub2">
-          <span slot="title"><a-icon type="team" /><span>Team</span></span>
-          <a-menu-item key="6">Team 1</a-menu-item>
-          <a-menu-item key="8">Team 2</a-menu-item>
+          <span slot="title"
+            ><a-icon type="branches" /><span>相互作用模块</span></span
+          >
+          <a-menu-item key="3">选取蛋白质链</a-menu-item>
+          <a-menu-item key="4">输出残基信息</a-menu-item>
         </a-sub-menu>
-        <a-menu-item key="9">
-          <a-icon type="file" />
-          <span>File</span>
+        <a-sub-menu key="sub3">
+          <span slot="title"><a-icon type="user" /><span>账号管理</span></span>
+          <a-menu-item key="5">修改密码</a-menu-item>
+          <a-menu-item key="6">管理用户</a-menu-item>
+        </a-sub-menu>
+        <a-menu-item key="7">
+          <router-link to="/user">
+            <a-icon type="poweroff" />
+            <span>退出登录</span>
+          </router-link>
+        </a-menu-item>
+        <a-menu-item key="8">
+          <router-link to="/system-introduce">
+            <a-icon type="html5" />
+            <span>系统信息</span>
+          </router-link>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0">
-        这里是头部导航</a-layout-header
-      >
+      <a-layout-header class="u-header" style="background: #fff; padding: 0">
+        <span style="font-size: 16px">蛋白质管理系统</span>
+        <a-dropdown class="u-avatar">
+          <a class="ant-dropdown-link" @click="e => e.preventDefault()">
+            <a-avatar
+              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            />
+          </a>
+          <a-menu slot="overlay">
+            <a-menu-item>
+              <router-link to="/user">修改密码</router-link>
+            </a-menu-item>
+            <a-menu-item>
+              <router-link to="/user">退出登录</router-link>
+            </a-menu-item>
+          </a-menu>
+        </a-dropdown>
+      </a-layout-header>
       <a-layout-content style="margin: 0 16px">
         <br />
         <div
@@ -54,7 +77,7 @@
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        Ant Design ©2018 Created by Ant UED
+        My Design ©2020 Created by ME
       </a-layout-footer>
     </a-layout>
   </a-layout>
@@ -72,5 +95,17 @@ export default {
   height: 32px;
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
+}
+
+.u-header {
+  position: relative;
+}
+
+.u-header .u-avatar {
+  border-radius: 50%;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 </style>
