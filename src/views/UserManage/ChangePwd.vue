@@ -30,9 +30,9 @@
           type="primary"
           class="login-form-button"
           :disabled="hasErrors"
-          @click="registerUser"
+          @click="changePwd"
         >
-          注册
+          修改密码
         </a-button>
       </a-form-item>
     </a-form>
@@ -53,32 +53,19 @@ export default {
       userName: "",
       password: "",
       confirmPwd: "",
+      currentUser: {},
       userList: [],
-      userNameList: [],
-      currentUser: {}
     };
   },
   mounted() {
-    this.userList = JSON.parse(
-      window.localStorage.getItem("user") ||
-      '[{"userName":"admin","password":123},{"userName":"xiaoming","password":123}]'
+    this.currentUser = JSON.parse(
+      window.localStorage.getItem("currentUser") ||
+      '{"userName":"admin","password":"123","admin":"1"}'
     );
-    for (let i = 0; i < this.userList.length; i++) {
-      this.userNameList.push(this.userList[i].userName);
-    }
+    this.userName = this.currentUser.userName;
+    this.userList = JSON.parse(window.localStorage.getItem("user"));
   },
   watch: {
-    userName(val) {
-      if (this.userNameList.indexOf(val) >= 0) {
-        this.userNameStatus = "error";
-        this.userNameHelp = "用户已存在";
-        this.hasErrors = true;
-      } else {
-        this.userNameStatus = "";
-        this.userNameHelp = "";
-        this.currentUser.userName = val;
-      }
-    },
     password() {
       this.hasErrors = true;
     },
@@ -98,6 +85,11 @@ export default {
           this.hasErrors = false;
         }
         this.currentUser.password = val;
+        for (let i = 0; i < this.userList.length; i++) {
+          if (this.userList[i].userName === this.currentUser.userName) {
+            this.userList[i].password = this.currentUser.password;
+          }
+        }
       }
     }
   },
@@ -113,14 +105,9 @@ export default {
         }
       });
     },
-    registerUser() {
-      this.userList.push(this.currentUser);
-      console.log(this.currentUser);
+    changePwd() {
       window.localStorage.setItem("user", JSON.stringify(this.userList));
-      this.confirmPwd = "";
-      this.password = "";
-      this.userName = "";
-      this.$router.push("/user");
+      this.$router.push("/protein-manage")
     }
   }
 };
