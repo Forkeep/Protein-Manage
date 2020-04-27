@@ -10,7 +10,8 @@ import {
   Layout,
   Menu,
   Avatar,
-  Dropdown
+  Dropdown,
+  Checkbox
 } from "ant-design-vue";
 
 Vue.config.productionTip = false;
@@ -22,6 +23,7 @@ Vue.use(Layout);
 Vue.use(Menu);
 Vue.use(Avatar);
 Vue.use(Dropdown);
+Vue.use(Checkbox);
 
 new Vue({
   router,

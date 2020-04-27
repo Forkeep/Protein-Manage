@@ -2,40 +2,14 @@
   <div class="login-wrapper">
     <div class="login">
       <h1>蛋白质管理系统</h1>
-
       <a-form layout="vertical" :form="form" @submit="handleSubmit">
-        <a-form-item
-          :validate-status="userNameError() ? 'error' : ''"
-          :help="userNameError() || ''"
-        >
-          <a-input
-            v-decorator="[
-              'userName',
-              {
-                rules: [{ required: true, message: '不存在此用户名！' }]
-              }
-            ]"
-            placeholder="Username"
-          >
+        <a-form-item :validateStatus="userNameStatus" :help="userNameHelp">
+          <a-input placeholder="Username" v-model="userName">
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
           </a-input>
         </a-form-item>
-        <a-form-item
-          :validate-status="passwordError() ? 'error' : ''"
-          :help="passwordError() || ''"
-        >
-          <a-input
-            v-decorator="[
-              'password',
-              {
-                rules: [
-                  { required: true, message: 'Please input your Password!' }
-                ]
-              }
-            ]"
-            type="password"
-            placeholder="Password"
-          >
+        <a-form-item :validateStatus="passwordStatus" :help="passwordHelp">
+          <a-input type="password" placeholder="Password" v-model="password">
             <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
           </a-input>
         </a-form-item>
@@ -46,7 +20,7 @@
                 <a-button
                   type="primary"
                   html-type="submit"
-                  :disabled="hasErrors(form.getFieldsError())"
+                  :disabled="hasErrors"
                 >
                   登录
                 </a-button>
@@ -67,17 +41,51 @@
 </template>
 
 <script lang="js">
-function hasErrors(fieldsError) {
-  return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
 
 export default {
   data() {
     return {
-      hasErrors,
+      userName: '',
+      password: '',
+      hasErrors: true,
+      userNameStatus: '',
+      passwordStatus: '',
+      userNameHelp: '',
+      passwordHelp: '',
       form: this.$form.createForm(this, {name: 'horizontal_login'}),
     };
   },
+  created() {
+  },
+  watch: {
+    userName(val) {
+      if (val !== 'admin') {
+        this.userNameStatus = 'error';
+        this.userNameHelp = '没有此用户';
+        this.hasErrors = true
+      } else {
+        this.userNameStatus = '';
+        this.userNameHelp = '';
+        if (this.password === '123') {
+          this.hasErrors = false
+        }
+      }
+    },
+    password(val) {
+      if (val !== '123') {
+        this.passwordStatus = 'error';
+        this.passwordHelp = '密码错误';
+        this.hasErrors = true
+      } else {
+        this.passwordStatus = '';
+        this.passwordHelp = '';
+        if (this.userName === 'admin') {
+          this.hasErrors = false
+        }
+      }
+    },
+  },
+
   mounted() {
     this.$nextTick(() => {
       // To disabled submit button at the beginning.
@@ -85,26 +93,6 @@ export default {
     });
   },
   methods: {
-    // Only show error after a field is touched.
-    userNameError() {
-      const {getFieldError, isFieldTouched} = this.form;
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          console.log(values)
-          // if (values.userName !== 'admin'){
-          //   return isFieldTouched('userName') && getFieldError('userName');
-          // }
-        }else {
-          console.log('wrong!!')
-        }
-      })
-      return isFieldTouched('userName') && getFieldError('userName');
-    },
-    // Only show error after a field is touched.
-    passwordError() {
-      const {getFieldError, isFieldTouched} = this.form;
-      return isFieldTouched('password') && getFieldError('password');
-    },
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
