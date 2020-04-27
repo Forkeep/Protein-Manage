@@ -50,7 +50,7 @@ const routes = [
         name: "protein_chain",
         component: () =>
           import(
-            /* webpackChunkName: "interact" */ "../views/Interact/ProteinChain"
+            /* webpackChunkName: "interact" */ "../views/Interact/ResiduesItem"
           )
       },
       {
@@ -70,11 +70,15 @@ const routes = [
       import(/* webpackChunkName: "protein" */ "../views/ProteinManage/index"),
     children: [
       {
+        path: "/protein-manage",
+        redirect: "/protein-manage/chain"
+      },
+      {
         path: "/protein-manage/chain",
         name: "chain",
         component: () =>
           import(
-            /* webpackChunkName: "protein" */ "../views/ProteinManage/ProteinChain"
+            /* webpackChunkName: "protein" */ "../views/ProteinManage/ProteinItem"
           )
       },
       {

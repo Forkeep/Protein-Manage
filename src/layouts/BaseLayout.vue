@@ -21,7 +21,7 @@
             ><a-icon type="bulb" /><span>蛋白质管理</span></span
           >
           <a-menu-item key="1">
-            <router-link to="/protein-manage/chain">蛋白质链</router-link>
+            <router-link to="/protein-manage/chain">蛋白质信息</router-link>
           </a-menu-item>
           <a-menu-item key="2">
             <router-link to="/protein-manage/props">蛋白质属性</router-link>
@@ -32,7 +32,9 @@
             ><a-icon type="branches" /><span>相互作用模块</span></span
           >
           <a-menu-item key="3">
-            <router-link to="/interact/protein-chain">选取蛋白质链</router-link>
+            <router-link to="/interact/protein-chain"
+              >蛋白质残基种类</router-link
+            >
           </a-menu-item>
           <a-menu-item key="4">
             <router-link to="/interact/residues">输出残基信息</router-link>

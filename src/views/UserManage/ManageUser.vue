@@ -8,9 +8,12 @@
         管理用户
       </template>
       <template slot="action" slot-scope="action">
-        <a-button type="danger" @click="delUser(action.split('-')[1])">{{
-          action
-        }}</a-button>
+        <a-button
+          type="danger"
+          @click="delUser(action.split('-')[1])"
+          :disabled="action === '删除用户-0'"
+          >{{ action }}</a-button
+        >
       </template>
     </a-table>
   </div>

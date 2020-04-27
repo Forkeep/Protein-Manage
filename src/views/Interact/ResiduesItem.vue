@@ -1,6 +1,6 @@
 <template>
   <div>
-    蛋白质链
+    残基信息
   </div>
 </template>
 
@@ -8,4 +8,4 @@
 export default {};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="less" scoped></style>
