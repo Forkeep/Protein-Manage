@@ -40,27 +40,27 @@
 </template>
 
 <script lang="js">
-export default {
-  data() {
-    return {
-      userNameStatus: "",
-      userNameHelp: "",
-      passwordStatus: "",
-      passwordHelp: "",
-      confirmStatus: "",
-      confirmHelp: "",
-      hasErrors: true,
-      userName: "",
-      password: "",
-      confirmPwd: "",
-      currentUser: {},
-      userList: [],
-    };
-  },
-  mounted() {
-    this.currentUser = JSON.parse(
-      window.localStorage.getItem("currentUser") ||
-      '{"userName":"admin","password":"123","admin":"1"}'
+  export default {
+    data() {
+      return {
+        userNameStatus: "",
+        userNameHelp: "",
+        passwordStatus: "",
+        passwordHelp: "",
+        confirmStatus: "",
+        confirmHelp: "",
+        hasErrors: true,
+        userName: "",
+        password: "",
+        confirmPwd: "",
+        currentUser: {},
+        userList: [],
+      };
+    },
+    mounted() {
+      this.currentUser = JSON.parse(
+        window.localStorage.getItem("currentUser") ||
+        '{"userName":"admin","password":"123","admin":"1"}'
     );
     this.userName = this.currentUser.userName;
     this.userList = JSON.parse(window.localStorage.getItem("user"));

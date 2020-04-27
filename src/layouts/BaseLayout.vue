@@ -43,7 +43,7 @@
           <a-menu-item key="5">
             <router-link to="/user-manage/change-pwd">修改密码</router-link>
           </a-menu-item>
-          <a-menu-item key="6">
+          <a-menu-item key="6" v-show="isAdmin">
             <router-link to="/user-manage/manage-user">管理用户</router-link>
           </a-menu-item>
         </a-sub-menu>
@@ -98,10 +98,16 @@
 export default {
   data() {
     return {
-      collapsed: false
+      collapsed: false,
+      currentUser: {},
+      isAdmin: false
     };
   },
-  props: ["defaultSelected"]
+  props: ["defaultSelected"],
+  mounted() {
+    this.currentUser = JSON.parse(window.localStorage.getItem("currentUser"));
+    this.isAdmin = this.currentUser.admin === "1";
+  }
 };
 </script>
 

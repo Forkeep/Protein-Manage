@@ -1,17 +1,17 @@
 <template>
   <div>
-    管理用户
-    <a-table
-      :columns="columns"
-      :rowKey="record => record.login.uuid"
-      :dataSource="data"
-      :pagination="pagination"
-      :loading="loading"
-      @change="handleTableChange"
-    >
-      <template slot="name" slot-scope="name">
-        {{ name.first }} {{ name.last }}</template
-      >
+    <a-table :columns="columns" :dataSource="data" bordered>
+      <template slot="name" slot-scope="text">
+        <a>{{ text }}</a>
+      </template>
+      <template slot="title">
+        管理用户
+      </template>
+      <template slot="action" slot-scope="action">
+        <a-button type="danger" @click="delUser(action.split('-')[1])">{{
+          action
+        }}</a-button>
+      </template>
     </a-table>
   </div>
 </template>
@@ -19,55 +19,54 @@
 <script lang="js">
 const columns = [
   {
-    title: 'Name',
+    title: '用户名',
     dataIndex: 'name',
-    sorter: true,
-    width: '20%',
     scopedSlots: {customRender: 'name'},
   },
   {
-    title: 'Gender',
-    dataIndex: 'gender',
-    filters: [
-      {text: 'Male', value: 'male'},
-      {text: 'Female', value: 'female'},
-    ],
-    width: '20%',
+    title: '用户类型',
+    dataIndex: 'type',
   },
   {
-    title: 'Email',
-    dataIndex: 'email',
+    title: '操作',
+    dataIndex: 'action',
+    scopedSlots: {customRender: 'action'},
   },
 ];
 
 export default {
-  mounted() {
-    this.fetch();
-  },
   data() {
     return {
       data: [],
-      pagination: {},
-      loading: false,
       columns,
+      userList: [],
+      oneUser: {},
     };
   },
-  methods: {
-    handleTableChange(pagination, filters, sorter) {
-      console.log(pagination);
-      const pager = {...this.pagination};
-      pager.current = pagination.current;
-      this.pagination = pager;
-      this.fetch({
-        results: pagination.pageSize,
-        page: pagination.current,
-        sortField: sorter.field,
-        sortOrder: sorter.order,
-        ...filters,
+  mounted() {
+    this.userList = JSON.parse(window.localStorage.getItem("user"));
+    for (let i = 0; i < this.userList.length; i++) {
+      this.data.push({
+        key: (i + 1).toString(),
+        name: this.userList[i].userName,
+        type: this.userList[i].admin === '1' ? '管理员' : '普通用户',
+        action: `删除用户-${i}`,
       });
-    },
+    }
+  },
+  methods: {
+    delUser(id) {
+      this.userList.splice(parseInt(id), 1);
+      window.localStorage.setItem('user', JSON.stringify(this.userList));
+      this.$router.push("/protein-manage");
+    }
   }
-}
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="less" scoped>
+th.column-money,
+td.column-money {
+  text-align: right !important;
+}
+</style>
