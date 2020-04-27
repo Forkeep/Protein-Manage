@@ -46,6 +46,10 @@ const routes = [
       import(/* webpackChunkName: "interact" */ "../views/Interact/index"),
     children: [
       {
+        path: "/interact",
+        redirect: "/interact/protein-chain"
+      },
+      {
         path: "/interact/protein-chain",
         name: "protein_chain",
         component: () =>
@@ -97,6 +101,10 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "user" */ "../views/UserManage/index"),
     children: [
+      {
+        path: "/user-manage",
+        redirect: "/user-manage/change-pwd"
+      },
       {
         path: "/user-manage/change-pwd",
         name: "change-pwd",
