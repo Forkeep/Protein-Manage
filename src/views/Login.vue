@@ -52,46 +52,56 @@ export default {
       passwordStatus: '',
       userNameHelp: '',
       passwordHelp: '',
+      userList: [],
+      userNameList: [],
+      currentUser: {},
       form: this.$form.createForm(this, {name: 'horizontal_login'}),
     };
   },
-  created() {
+  mounted() {
+    this.userList = JSON.parse(window.localStorage.getItem('user') || '[{"userName":"admin","password":"123"},{"userName":"xiaoming","password":"123"}]');
+    for (let i = 0; i < this.userList.length; i++) {
+      this.userNameList.push(this.userList[i].userName)
+    }
+  },
+  beforeDestroy() {
+    window.localStorage.setItem('user', JSON.stringify(this.userList))
   },
   watch: {
     userName(val) {
-      if (val !== 'admin') {
+      if (this.userNameList.indexOf(val) < 0) {
         this.userNameStatus = 'error';
         this.userNameHelp = '没有此用户';
         this.hasErrors = true
       } else {
         this.userNameStatus = '';
         this.userNameHelp = '';
-        if (this.password === '123') {
+        for (let i = 0; i < this.userList.length; i++) {
+          if (this.userList[i].userName === val){
+            this.currentUser = this.userList[i]
+          }
+        }
+        console.log(this.currentUser);
+        if (this.password === this.currentUser.password) {
           this.hasErrors = false
         }
       }
     },
     password(val) {
-      if (val !== '123') {
+      if (val !== this.currentUser.password.toString()) {
         this.passwordStatus = 'error';
         this.passwordHelp = '密码错误';
         this.hasErrors = true
       } else {
         this.passwordStatus = '';
         this.passwordHelp = '';
-        if (this.userName === 'admin') {
+        if (this.userName === this.currentUser.userName) {
           this.hasErrors = false
         }
       }
     },
   },
 
-  mounted() {
-    this.$nextTick(() => {
-      // To disabled submit button at the beginning.
-      this.form.validateFields();
-    });
-  },
   methods: {
     handleSubmit(e) {
       e.preventDefault();

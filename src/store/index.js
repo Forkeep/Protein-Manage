@@ -5,7 +5,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    count: 0
+    user: JSON.parse(
+      window.localStorage.getItem("user") |
+        "[{userName:'admin',password:123},{userName:'xiaoming',password:123}]"
+    )
   },
   mutations: {},
   actions: {},
