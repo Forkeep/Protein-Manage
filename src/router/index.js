@@ -43,19 +43,71 @@ const routes = [
     path: "/interact",
     name: "interact",
     component: () =>
-      import(/* webpackChunkName: "interact" */ "../views/Interact/index")
+      import(/* webpackChunkName: "interact" */ "../views/Interact/index"),
+    children: [
+      {
+        path: "/interact/protein-chain",
+        name: "protein_chain",
+        component: () =>
+          import(
+            /* webpackChunkName: "interact" */ "../views/Interact/ProteinChain"
+          )
+      },
+      {
+        path: "/interact/residues",
+        name: "residues",
+        component: () =>
+          import(
+            /* webpackChunkName: "interact" */ "../views/Interact/Residues"
+          )
+      }
+    ]
   },
   {
     path: "/protein-manage",
     name: "protein-manage",
     component: () =>
-      import(/* webpackChunkName: "protein" */ "../views/ProteinManage/index")
+      import(/* webpackChunkName: "protein" */ "../views/ProteinManage/index"),
+    children: [
+      {
+        path: "/protein-manage/chain",
+        name: "chain",
+        component: () =>
+          import(
+            /* webpackChunkName: "protein" */ "../views/ProteinManage/ProteinChain"
+          )
+      },
+      {
+        path: "/protein-manage/props",
+        name: "props",
+        component: () =>
+          import(
+            /* webpackChunkName: "protein" */ "../views/ProteinManage/ProteinProps"
+          )
+      }
+    ]
   },
   {
     path: "/user-manage",
     name: "user-manage",
     component: () =>
-      import(/* webpackChunkName: "user" */ "../views/UserManage/index")
+      import(/* webpackChunkName: "user" */ "../views/UserManage/index"),
+    children: [
+      {
+        path: "/user-manage/change-pwd",
+        name: "change-pwd",
+        component: () =>
+          import(/* webpackChunkName: "user" */ "../views/UserManage/ChangePwd")
+      },
+      {
+        path: "/user-manage/manage-user",
+        name: "manage-user",
+        component: () =>
+          import(
+            /* webpackChunkName: "user" */ "../views/UserManage/ManageUser"
+          )
+      }
+    ]
   },
   {
     path: "/system-introduce",

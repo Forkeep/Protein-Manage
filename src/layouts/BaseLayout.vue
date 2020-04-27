@@ -15,25 +15,37 @@
       >
         蛋白质
       </div>
-      <a-menu theme="dark" :defaultSelectedKeys="['8']" mode="inline">
+      <a-menu theme="dark" :defaultSelectedKeys="defaultSelected" mode="inline">
         <a-sub-menu key="sub1">
           <span slot="title"
             ><a-icon type="bulb" /><span>蛋白质管理</span></span
           >
-          <a-menu-item key="1">蛋白质链</a-menu-item>
-          <a-menu-item key="2">蛋白质属性</a-menu-item>
+          <a-menu-item key="1">
+            <router-link to="/protein-manage/chain">蛋白质链</router-link>
+          </a-menu-item>
+          <a-menu-item key="2">
+            <router-link to="/protein-manage/props">蛋白质属性</router-link>
+          </a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="sub2">
           <span slot="title"
             ><a-icon type="branches" /><span>相互作用模块</span></span
           >
-          <a-menu-item key="3">选取蛋白质链</a-menu-item>
-          <a-menu-item key="4">输出残基信息</a-menu-item>
+          <a-menu-item key="3">
+            <router-link to="/interact/protein-chain">选取蛋白质链</router-link>
+          </a-menu-item>
+          <a-menu-item key="4">
+            <router-link to="/interact/residues">输出残基信息</router-link>
+          </a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="sub3">
           <span slot="title"><a-icon type="user" /><span>账号管理</span></span>
-          <a-menu-item key="5">修改密码</a-menu-item>
-          <a-menu-item key="6">管理用户</a-menu-item>
+          <a-menu-item key="5">
+            <router-link to="/user-manage/change-pwd">修改密码</router-link>
+          </a-menu-item>
+          <a-menu-item key="6">
+            <router-link to="/user-manage/manage-user">管理用户</router-link>
+          </a-menu-item>
         </a-sub-menu>
         <a-menu-item key="7">
           <router-link to="/user">
@@ -60,7 +72,7 @@
           </a>
           <a-menu slot="overlay">
             <a-menu-item>
-              <router-link to="/user">修改密码</router-link>
+              <router-link to="/user-manage/change-pwd">修改密码</router-link>
             </a-menu-item>
             <a-menu-item>
               <router-link to="/user">退出登录</router-link>
@@ -85,8 +97,11 @@
 <script>
 export default {
   data() {
-    return { collapsed: false };
-  }
+    return {
+      collapsed: false
+    };
+  },
+  props: ["defaultSelected"]
 };
 </script>
 

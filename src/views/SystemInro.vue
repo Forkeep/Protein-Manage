@@ -1,5 +1,5 @@
 <template>
-  <BaseLayout>
+  <BaseLayout :default-selected="['8']">
     <div>系统介绍</div>
   </BaseLayout>
 </template>

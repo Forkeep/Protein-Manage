@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BaseLayout>
+    <BaseLayout :default-selected="['3']">
       <router-view />
     </BaseLayout>
   </div>

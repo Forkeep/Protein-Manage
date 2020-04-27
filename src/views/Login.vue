@@ -12,9 +12,7 @@
             v-decorator="[
               'userName',
               {
-                rules: [
-                  { required: true, message: 'Please input your username!' }
-                ]
+                rules: [{ required: true, message: '不存在此用户名！' }]
               }
             ]"
             placeholder="Username"
@@ -90,6 +88,16 @@ export default {
     // Only show error after a field is touched.
     userNameError() {
       const {getFieldError, isFieldTouched} = this.form;
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log(values)
+          // if (values.userName !== 'admin'){
+          //   return isFieldTouched('userName') && getFieldError('userName');
+          // }
+        }else {
+          console.log('wrong!!')
+        }
+      })
       return isFieldTouched('userName') && getFieldError('userName');
     },
     // Only show error after a field is touched.
@@ -118,7 +126,8 @@ export default {
   justify-content: center;
 }
 .login {
-  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 3px 3px 3px rgba(0, 0, 0, 0.2);
   background: white;
   min-height: 50vh;
   min-width: 30vw;
