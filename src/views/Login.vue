@@ -16,15 +16,14 @@
         <a-form-item>
           <div class="login-or-register">
             <div>
-              <router-link class="to-login" to="/system-introduce">
-                <a-button
-                  type="primary"
-                  html-type="submit"
-                  :disabled="hasErrors"
-                >
-                  登录
-                </a-button>
-              </router-link>
+              <a-button
+                type="primary"
+                html-type="submit"
+                :disabled="hasErrors"
+                @click="loginUser"
+              >
+                登录
+              </a-button>
             </div>
             <div>
               <router-link class="to-register" to="/user/register">
@@ -59,7 +58,7 @@ export default {
     };
   },
   mounted() {
-    this.userList = JSON.parse(window.localStorage.getItem('user') || '[{"userName":"admin","password":"123"},{"userName":"xiaoming","password":"123"}]');
+    this.userList = JSON.parse(window.localStorage.getItem('user') || '[{"userName":"admin","password":"123","admin":"1"},{"userName":"xiaoming","password":"123","admin":"0"}]');
     for (let i = 0; i < this.userList.length; i++) {
       this.userNameList.push(this.userList[i].userName)
     }
@@ -111,6 +110,10 @@ export default {
         }
       });
     },
+    loginUser(){
+      window.localStorage.setItem("currentUser",JSON.stringify(this.currentUser));
+      this.$router.push("/protein-manage");
+    }
   },
 };
 </script>

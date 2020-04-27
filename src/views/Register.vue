@@ -117,6 +117,7 @@ export default {
           this.hasErrors = false;
         }
         this.currentUser.password = val;
+        this.currentUser.admin = "0";
       }
     }
   },
