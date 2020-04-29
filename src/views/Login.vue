@@ -121,7 +121,7 @@ export default {
 <style lang="less" scoped>
 .login-wrapper {
   min-height: 100vh;
-  background-image: url("https://raw.githubusercontent.com/Forkeep/Image_repo/master/img/protein.jpg");
+  background-image: url("http://pic34.photophoto.cn/20150302/0014026511986720_b.jpg");
   display: flex;
   align-items: center;
   justify-content: center;
