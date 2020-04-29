@@ -50,18 +50,36 @@ export default {
       data: [],
       columns,
       proteinList: [],
-      currentProteinResidues: []
+      currentProteinResidues: [],
+      currentProtein: ""
     };
   },
   mounted() {
     this.proteinList = JSON.parse(window.localStorage.getItem("proteinItem"));
   },
+  watch: {
+    currentProteinResidues() {
+      this.data = [];
+      for (let i = 0; i < this.currentProteinResidues.length; i++) {
+        this.data.push({
+          key: i.toString(),
+          protein: this.currentProtein,
+          residues: this.currentProteinResidues[i][0],
+          col_name: this.currentProteinResidues[i][1],
+          res_props: this.currentProteinResidues[i][2]
+        });
+      }
+    }
+  },
   methods: {
     handleMenuClick(e) {
-      console.log("click", e);
       let currentIndex = parseInt(e.key.split("_")[1]);
+      this.currentProtein = this.proteinList[currentIndex][0];
       let currentId = this.proteinList[currentIndex][1].toLowerCase();
-      console.log(currentId);
+      console.log(`red_${currentId}`);
+      this.currentProteinResidues = JSON.parse(
+        window.localStorage.getItem(`red_${currentId}`)
+      );
     }
   }
 };

@@ -34,7 +34,7 @@
           <a-menu-item key="3">
             <router-link to="/interact/protein-chain">查看残基信息</router-link>
           </a-menu-item>
-          <a-menu-item key="4">
+          <a-menu-item key="4" v-show="isAdmin">
             <router-link to="/interact/residues">计算残基信息</router-link>
           </a-menu-item>
         </a-sub-menu>
