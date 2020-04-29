@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-table :columns="columns" :dataSource="data" bordered>
+    <a-table :columns="columns" :dataSource="data" bordered size="small">
       <template slot="name" slot-scope="text">
         <a>{{ text }}</a>
       </template>
