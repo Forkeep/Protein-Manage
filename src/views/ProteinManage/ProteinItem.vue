@@ -62,7 +62,7 @@ export default {
       currentUser: {}
     }
   },
-  mounted() {
+  created() {
     this.currentUser = JSON.parse(window.localStorage.getItem('currentUser'));
     this.proteinList = JSON.parse(window.localStorage.getItem('proteinItem') || '[\n' +
       '["恶性T细胞扩增序列蛋白","3R90","RNA结合蛋白","大肠杆菌BL21（DE3）","2011/4/13","L"],\n' +

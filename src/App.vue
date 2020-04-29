@@ -4,13 +4,7 @@
   </div>
 </template>
 <script>
-export default {
-  computed: {
-    count() {
-      return this.$store.state.count;
-    }
-  }
-};
+export default {};
 </script>
 
 <style lang="less">

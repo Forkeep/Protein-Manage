@@ -32,12 +32,10 @@
             ><a-icon type="branches" /><span>相互作用模块</span></span
           >
           <a-menu-item key="3">
-            <router-link to="/interact/protein-chain"
-              >蛋白质残基种类</router-link
-            >
+            <router-link to="/interact/protein-chain">查看残基信息</router-link>
           </a-menu-item>
           <a-menu-item key="4">
-            <router-link to="/interact/residues">输出残基信息</router-link>
+            <router-link to="/interact/residues">计算残基信息</router-link>
           </a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="sub3">
