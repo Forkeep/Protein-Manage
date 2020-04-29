@@ -13,7 +13,8 @@ import {
   Dropdown,
   Checkbox,
   Table,
-  PageHeader
+  PageHeader,
+  Select
 } from "ant-design-vue";
 
 Vue.config.productionTip = false;
@@ -28,6 +29,7 @@ Vue.use(Dropdown);
 Vue.use(Checkbox);
 Vue.use(Table);
 Vue.use(PageHeader);
+Vue.use(Select);
 
 new Vue({
   router,
