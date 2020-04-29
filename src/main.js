@@ -12,7 +12,8 @@ import {
   Avatar,
   Dropdown,
   Checkbox,
-  Table
+  Table,
+  PageHeader
 } from "ant-design-vue";
 
 Vue.config.productionTip = false;
@@ -26,6 +27,7 @@ Vue.use(Avatar);
 Vue.use(Dropdown);
 Vue.use(Checkbox);
 Vue.use(Table);
+Vue.use(PageHeader);
 
 new Vue({
   router,

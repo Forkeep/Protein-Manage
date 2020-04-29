@@ -17,7 +17,7 @@
         </a-button>
       </template>
     </a-table>
-    <router-link to="" v-show="currentUser.admin === '1'">
+    <router-link to="/protein-manage/add" v-show="currentUser.admin === '1'">
       <a-button type="primary"> 添加蛋白质</a-button>
     </router-link>
   </div>
@@ -62,7 +62,7 @@ export default {
       currentUser: {}
     }
   },
-  created() {
+  mounted() {
     this.currentUser = JSON.parse(window.localStorage.getItem('currentUser'));
     this.proteinList = JSON.parse(window.localStorage.getItem('proteinItem') || '[\n' +
       '["恶性T细胞扩增序列蛋白","3R90","RNA结合蛋白","大肠杆菌BL21（DE3）","2011/4/13","L"],\n' +
@@ -106,7 +106,7 @@ export default {
     delProteinItem(id) {
       this.proteinList.splice(id, 1);
       window.localStorage.setItem('proteinItem', JSON.stringify(this.proteinList));
-      this.$router.push('/system-introduce')
+      this.$router.go(0);
     }
   }
 }

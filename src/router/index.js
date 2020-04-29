@@ -86,11 +86,11 @@ const routes = [
           )
       },
       {
-        path: "/protein-manage/props",
+        path: "/protein-manage/add",
         name: "props",
         component: () =>
           import(
-            /* webpackChunkName: "protein" */ "../views/ProteinManage/ProteinProps"
+            /* webpackChunkName: "protein" */ "../views/ProteinManage/ProteinAdd"
           )
       }
     ]

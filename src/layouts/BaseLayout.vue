@@ -24,7 +24,7 @@
             <router-link to="/protein-manage/chain">蛋白质信息</router-link>
           </a-menu-item>
           <a-menu-item key="2" v-show="isAdmin">
-            <router-link to="/protein-manage/props">添加蛋白质</router-link>
+            <router-link to="/protein-manage/add">添加蛋白质</router-link>
           </a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="sub2">
